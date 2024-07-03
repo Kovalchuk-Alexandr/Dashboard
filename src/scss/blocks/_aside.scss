@@ -1,0 +1,51 @@
+.side-menu {
+    padding: 36px 28px 76px;
+    width: 306px;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    flex-shrink: 0;
+}
+
+.side-menu__logo {
+    color: var(--text-accent);
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 64px;
+}
+
+.logo  {
+    &__img {
+        margin-right: 8px;
+    }
+    &__name {
+        color: var(--accent);
+        font-weight: 600;
+        font-size: 26px;
+        letter-spacing: 0.01em;
+        margin-right: 4px;
+    }
+    &__version {
+        font-weight: 500;
+        font-size: 10px;
+        letter-spacing: -0.01em;
+        color: #838383;
+    }
+}
+
+
+.side-menu__nav {
+    width: 100%;
+
+}
+
+.side-menu__user {
+ 	margin-top: auto;
+	display: flex;
+	align-items: center;
+	column-gap: 12px;
+}

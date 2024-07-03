@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Dashboard</title>
+	<link rel="stylesheet" href="./css/main.css" />
+
+	<link rel="icon" type="image/x-icon" href="./img/favicons/favicon.svg">
+	<link rel="apple-touch-icon" sizes="180x180" href="./img/favicons/apple-touch-icon.png">
+</head>
+
+<body>
+	<!-- @@include('blocks/header.html') -->
+	<section >
+		<h2 class="visually-hidden">title</h2>
+		<div class="container">
+			<div class="wrapper">
+				@@include('blocks/aside.html')
+				@@include('blocks/main-content.html')
+			</div>
+		</div>
+	</section>
+	<!-- <div class="container wrapper">
+	</div> -->
+	
+	<main class=" none">
+	</main>
+	<!-- @@include('blocks/footer.html') -->
+	<!-- <script src="./js/index.bundle.js"></script> -->
+	 <!-- <script src="./js/modules/customers.json"></script> -->
+	 <script src="./../../data/customers.js"></script>
+	 <script src="./js/modules/menu-active.js"></script>
+	 <script src="./js/modules/btn-status.js"></script>
+	 <script type="module" src="./js/modules/customers.js"></script>
+</body>
+
+</html>

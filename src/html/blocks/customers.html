@@ -1,0 +1,51 @@
+    <div class="customers">
+        <div class="container-custom">
+            <div class="customers__header">
+                <div class="header__content">
+                    <div class="header__title">All Customers</div>
+                    <div class="header__desc">Active Members</div>
+                </div>
+
+                <div class="customers__form">
+                    <button class="form-btn" type="submit">
+                        <svg class="icon icon--search">
+                            <use href="./img/svgsprite/sprite.symbol.svg#search"></use>
+                        </svg>
+                    </button>
+
+                    <form action="submit" class="form-item">
+                        <input type="search" class="search-input" placeholder="Search">
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        @@include('customers-table.html')
+
+        <div class="container-custom">
+            <div class="customers__footer">
+                <div class="footer__info">
+                    Showing data 
+                    <span class="start-item">1</span>  to 
+                    <span class="end-item">8</span>  of  &nbsp;
+                    <span class="total-items"> 256K</span>  entries
+                </div>
+
+                <div class="footer__pagination">
+                    <button class="btn-pag btn-prev">&lt;</button>
+
+                    <div class="btn-range">
+                        <button class="btn-pag">1</button>
+                        <button class="btn-pag">2</button>
+                        <button class="btn-pag">3</button>
+                        <button class="btn-pag">4</button>
+                    </div>
+                    
+                    <div class="btn-pag btn-dots">...</div>
+                    <button class="btn-pag btn-pg">40</button>
+                    <button class="btn-pag btn-next">&gt;</button>
+                </div>
+            </div>
+        </div>
+
+    </div>

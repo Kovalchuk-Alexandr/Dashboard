@@ -1,0 +1,27 @@
+.icons-wrapper {
+	padding: 30px 0;
+	display: flex;
+	column-gap: 30px;
+}
+
+.icon {
+	fill: transparent;
+	stroke: transparent;
+	width: 24px;
+	height: 24px;
+	stroke: #9197b3;
+}
+
+.icon--search {
+	stroke: #7e7e7e;
+}
+
+
+.icon--user {
+	stroke: rgb(26, 134, 235);
+	transition: all 0.2s ease-in;
+
+	&:hover {
+		stroke: rgb(17, 193, 90);
+	}
+}
