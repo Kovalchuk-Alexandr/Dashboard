@@ -3,12 +3,10 @@
 // import btnStatus from "./btn-status.js";
 
 // function customers() {
-
-    // console.log("jsonCustomers : ");
-    // console.log(jsonCustomers);
-   
     
+    // Количество выводимых записей на странице
     let lengthPages = 2;
+
     const numPages = Math.ceil( jsonCustomers.length / lengthPages); // Количество страниц
     let arrayPages = [];        // Массив всех страниц
     let arrayPagesToShow = [];  // Массив фрагмента (4) страниц в пагинации
@@ -21,7 +19,7 @@
     let startIndexOfRangePages ; 
     let endIndexOfRangePages  ;
 
-    console.log('numPages: ' + numPages);
+    // console.log('numPages: ' + numPages);
 
     // Массив со страницами
     for (let i = 0; i < numPages; i++) {
@@ -34,8 +32,6 @@
     let currentPage = arrayPages[currentPageIndex];
     let customersToShow;
     
-    console.log('Current page: ' + currentPage);
-
     // Фрагмент страниц для вывода в пагинации
     if (numPages <= 4) {
         arrayPagesToShow = arrayPages;
@@ -47,9 +43,6 @@
         }
 
         endIndexOfRangePages = arrayPagesToShow.length - 1;
-
-        // console.log("startIndexOfRangePages: " + startIndexOfRangePages);
-        // console.log("endIndexOfRangePages: " + endIndexOfRangePages);
 
     } else {
         if (currentPageIndex == 0) {
@@ -71,7 +64,6 @@
     const totalItems = document.querySelector(".total-items");
     
     // Node диапазона кнопок пагинации
-    // let btnPages = document.querySelectorAll(".btn-range > .btn-pag");
     const btnPrev = document.querySelector(".btn-prev");
     const btnNext = document.querySelector(".btn-next");
     const btnPage = document.querySelector(".btn-pg");
@@ -84,82 +76,45 @@
     // Отслеживаем клик по странице в pagination range
     listenBtnClick();
     
-    // btnPages = document.querySelectorAll(".btn-range > .btn-pag");
-    
-    // console.log('btnPages Start: ');
-    // console.log(btnPages.innerHTML);
-    // console.log('-----------------');
-    // // Обработчик клика по 'btnPages'?, установка активной
-    // // btnPages.forEach(function (btn) {
-    // for (const btn of btnPages) {
-    //    console.log("btn in forEach: ");
-    //     // console.log(btn);
-    //     console.log("-----------------");
-    //     // очищаем класс "btn-pag--active" у всех элементов
-    //     // btnPages.forEach(function (btn) { 
-    //     //     btn.classList.remove("btn-pag--active");
-    //     // });
-
-    //     btn.addEventListener("click", function () {
-    //         console.log("btnPages in forEach: ");
-    //         // console.log(btnPages);
-    //         //     console.log('-----------------');
-    //         //     console.log("btn: ");
-    //         // console.log(btn);
-    //         console.log(btn.textContent);
-    //         // Устанавливаем активный класс нажатой кнопки
-    //         btn.classList.add("btn-pag--active");
-
-    //         // Устанавливаем активную страницу и индекс
-    //         currentPage = btn.innerText;
-    //         currentPageIndex = arrayPages.indexOf(Number(currentPage));
-    //         console.log("Current page: " + currentPage);
-    //         console.log("Current page Index: " + currentPageIndex);
-
-    //         goInit();
-    //     });
-    // };
-
     // ...запуск события на элементе!
     //   let event = new Event("click", {bubbles: true}); // (2)
     //   btnPages.dispatchEvent(event);
 
     // ==========   Обработчик нажатия кнопки  'btn-prev'  =================
     // const btnPrev = document.querySelector('.btn-prev');
-    btnPrev.addEventListener('click', function() {
+    btnPrev.addEventListener("click", function() {
 
-        console.log("currentPageIndex before: " + currentPageIndex);
         if (currentPageIndex > 0) {
             currentPageIndex--;
             currentPage = arrayPages[currentPageIndex];
-        } 
-        
-        console.log("currentPageIndex after: " + currentPageIndex);
-        console.log("currentPage" + currentPage);
+
+            // Если новый счетчик меньше левой границы диапазона вывода, меняем диапазон
+            if (currentPageIndex < startIndexOfRangePages) {
+                startIndexOfRangePages = currentPageIndex;
+                endIndexOfRangePages = startIndexOfRangePages + 4;
+                arrayPagesToShow = arrayPages.slice(
+                    startIndexOfRangePages,
+                    endIndexOfRangePages
+                );
+
+                renderBtnRange();
+            }
+        }
 
         // Установка активной страницы в блоке 'btn-range'
         // Установка/снятие атрибуа "disabled"
         // Обновляем данные на странице
         goInit();
-        // renderBtnRange();   
     });
 
     // ==========   Обработчик нажатия кнопки  'btn-next'  =================
-    btnNext.addEventListener('click', function() {
-
-        console.log("currentPageIndex before: " + currentPageIndex);
-        console.log("arrayPages.length: " + arrayPages.length);
+    btnNext.addEventListener("click", function () {
+        
         if (currentPageIndex < arrayPages.length) {
             currentPageIndex++;
             currentPage = arrayPages[currentPageIndex];
-                
-            console.log("currentPageIndex after: " + currentPageIndex);
-            console.log("currentPage" + currentPage);
-            console.log("-----------------");
-            console.log("startIndexOfRangePages: " + startIndexOfRangePages);
-            console.log("endIndexOfRangePages: " + endIndexOfRangePages);
-        // console.log("arrayPagesToShow: " + arrayPagesToShow);
 
+            // Если новый счетчик больше правой границы диапазона вывода, меняем диапазон
             if (currentPageIndex >= endIndexOfRangePages) {
                 endIndexOfRangePages = currentPageIndex + 1;
                 startIndexOfRangePages = endIndexOfRangePages - 4;
@@ -167,87 +122,96 @@
                     startIndexOfRangePages,
                     endIndexOfRangePages
                 );
-                renderBtnRange(); 
-            } 
+                renderBtnRange();
+            }
         }
-        console.log("-----------------");
-        console.log("startIndexOfRangePages after: " + startIndexOfRangePages);
-        console.log("endIndexOfRangePages after: " + endIndexOfRangePages);
-        console.log("arrayPagesToShow : ");
-        console.log(arrayPagesToShow);
-
         // Установка активной страницы в блоке 'btn-range'
         // Установка/снятие атрибуа "disabled"
         // Обновляем данные на странице
         goInit();
-
-        // renderBtnRange();   
     });
-    
-              
+
+    // ==========   Обработчик нажатия кнопки  'btn-pg'  =================
+    btnPage.addEventListener("click", function () {
+        // console.log('btn-pg click');
+        // console.log('btn-pg: ');
+        
+        // if (currentPage < 40) {
+            console.log("currentPage before: " + currentPage);
+            if (Number(currentPage) + 40 < arrayPages.length) {
+                // Number(currentPage) += 40;
+                currentPage = Number(currentPage) + 40;
+                currentPageIndex = arrayPages.indexOf(currentPage);
+
+                endIndexOfRangePages = currentPageIndex + 1;
+                startIndexOfRangePages = endIndexOfRangePages - 4;
+                // arrayPagesToShow = arrayPages.slice(
+                //     startIndexOfRangePages,
+                //     endIndexOfRangePages
+                // );
+                console.log(
+                    "currentPage after + 40 <= arrayPages.length " + currentPage);
+                    console.log("currentPageIndex: " + currentPageIndex);
+                    
+            } else {
+                currentPageIndex = arrayPages.length - 1;
+                currentPage = arrayPages[arrayPages.length - 1];
+
+                endIndexOfRangePages = currentPageIndex + 1;
+                startIndexOfRangePages = endIndexOfRangePages - 4;
+            }
+            console.log("currentPage after: " + currentPage);
+            console.log("currentPageIndex after: " + currentPageIndex);
+            arrayPagesToShow = arrayPages.slice(
+                startIndexOfRangePages,
+                endIndexOfRangePages
+            );
+
+            console.log("arrayPagesToShow: ");
+            console.log(arrayPagesToShow);
+            
+            renderBtnRange();
+
+            // console.log("currentPage after: " + currentPage + 40);
+            
+            // currentPageIndex++;
+            // currentPage = arrayPages[currentPageIndex];
+
+            // Если новый счетчик больше правой границы диапазона вывода, меняем диапазон
+            // if (currentPageIndex >= endIndexOfRangePages) {
+            //     endIndexOfRangePages = currentPageIndex + 1;
+            //     startIndexOfRangePages = endIndexOfRangePages - 4;
+            //     arrayPagesToShow = arrayPages.slice(
+            //         startIndexOfRangePages,
+            //         endIndexOfRangePages
+            //     );
+            //     renderBtnRange();
+            // }
+        // }
+        // Установка активной страницы в блоке 'btn-range'
+        // Установка/снятие атрибуа "disabled"
+        // Обновляем данные на странице
+        goInit();
+    });
+
     // ==========   Инициализация   ===========================================================
     function listenBtnClick() {
-        const btnPages = document.querySelectorAll(".btn-range > .btn-pag");
         const btnRange = document.querySelectorAll(".btn-range");
 
-        btnRange.forEach(function (el) {
-            el.addEventListener('click', function (e) {
-                console.log("btnRange Start: ");
-                console.log(btnRange);
-                console.log("-----------------");
-                console.log('e');
-                console.log(e);
-                console.log('e.target');
-                console.log(e.target);
-                console.log(e.target.innerText);
+        btnRange.forEach(function(el) {
+            el.addEventListener("click", function(e) {
+                // console.log(e.target.innerText);
                 currentPage = e.target.innerText;
                 currentPageIndex = arrayPages.indexOf(Number(currentPage));
-                console.log("Current page: " + currentPage);
-                console.log("Current page Index: " + currentPageIndex);
+                // console.log("Current page: " + currentPage);
+                // console.log("Current page Index: " + currentPageIndex);
                 goInit();
             });
         });
-
-        console.log("btnPages Start: ");
-        console.log(btnPages);
-        console.log("-----------------");
-        // Обработчик клика по 'btnPages'?, установка активной
-        // btnPages.forEach(function (btn) {
-        // for (const btn of btnPages) {
-        //     console.log("btn in forEach: ");
-        //     // console.log(btn);
-        //     console.log("-----------------");
-        //     // очищаем класс "btn-pag--active" у всех элементов
-        //     // btnPages.forEach(function (btn) {
-        //     //     btn.classList.remove("btn-pag--active");
-        //     // });
-
-        //     btn.addEventListener("click", function() {
-        //         console.log("btnPages in forEach: ");
-        //         // console.log(btnPages);
-        //         //     console.log('-----------------');
-        //         //     console.log("btn: ");
-        //         // console.log(btn);
-        //         console.log(btn.textContent);
-        //         // Устанавливаем активный класс нажатой кнопки
-        //         btn.classList.add("btn-pag--active");
-
-        //         // Устанавливаем активную страницу и индекс
-        //         currentPage = btn.innerText;
-        //         currentPageIndex = arrayPages.indexOf(Number(currentPage));
-        //         console.log("Current page: " + currentPage);
-        //         console.log("Current page Index: " + currentPageIndex);
-
-        //         goInit();
-        //     });
-        // }
-        
     };
 
     // ==========   Инициализация   ===========================================================
     function goInit() {
-        // renderBtnRange();        
-
         // Установка активной страницы в блоке 'btn-range'
         setActiveButtonRange(currentPage);
 
@@ -256,9 +220,6 @@
 
         // Обновляем данные на странице
         renderPage();
-
-        // Отслеживаем клик по странице в pagination range
-        // listenBtnClick();
     }
 
     // ==========   Установка атрибуа "disabled"   ============================================
@@ -277,21 +238,25 @@
         };
 
         // Если меньше 40 страниц, делаем кнопку btnPage - "disabled"
-        if (arrayPages.length < 40) {
+        let maxRange = arrayPages.length < 40
+            || currentPageIndex == arrayPages.length - 1
+            || (currentPageIndex ) == arrayPages.length - 2
+            || (currentPageIndex) == arrayPages.length - 3
+            || (currentPageIndex) == arrayPages.length - 4
+
+        if ( maxRange ) {
             btnPage.setAttribute("disabled", "");
-        } else {btnPage.removeAttribute("disabled");};
+        } else {
+            btnPage.removeAttribute("disabled");
+        };
     };
 
     // ==========   Установка активной страницы в блоке 'btn-range'   =========================
-    // renderBtnRange();   
     setActiveButtonRange(currentPage);
 
     // ==========   Функция установки активной страницы в блоке 'btn-range'   =================
     function setActiveButtonRange(currentPage) {
         const btnPages = document.querySelectorAll(".btn-range > .btn-pag");
-        // console.log("btnPages in setActiveButtonRange: ");
-        // console.log(btnPages);
-        
 
         btnPages.forEach(function (btn) {
             // В зависимости от статуса устанавливаем класс 'active'
@@ -333,12 +298,6 @@
                 
             btnRange.innerHTML += text;
         });
-        console.log("btnRange:  ");
-         console.log(btnRange.innerHTML);
-        //  console.log("btnPages in Render:  ");
-        //  console.log(btnPages.innerHTML);
-         console.log("-----------------");
-        // btnPages = document.querySelectorAll(".btn-range > .btn-pag");
     };
 
     // ==========   Вывод продуктов в цикле из каталога   =============================
@@ -368,14 +327,11 @@
         // Определяем начальный и конечный индекс элементов данной страницы
         getIndexRange(currentPage);
 
-        // console.log("startIndexOfRange: " + startIndexOfRange);
-        // console.log("endIndexOfRange: " + endIndexOfRange);
-
         // Выборка элементов текущей страницы для рендеринга
         customersToShow = jsonCustomers.slice(startIndexOfRange, endIndexOfRange + 1);
 
-        console.log("customersToShow: ");
-        console.log(customersToShow);
+        // console.log("customersToShow: ");
+        // console.log(customersToShow);
 
         // Элементы статистики: "показано 1 до 8 эл-тов из "
         startItem.textContent = startIndexOfRange + 1;
@@ -387,10 +343,6 @@
         
         btnStatus();
     };
-    
-    // console.log('arrayPages: ');
-    // console.log(arrayPages);
-    // console.log('-----------------');
 // }
 
 // export default customers;
