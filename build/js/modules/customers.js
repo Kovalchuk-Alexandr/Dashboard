@@ -71,7 +71,7 @@
     const totalItems = document.querySelector(".total-items");
     
     // Node диапазона кнопок пагинации
-    let btnPages = document.querySelectorAll(".btn-range > .btn-pag");
+    // let btnPages = document.querySelectorAll(".btn-range > .btn-pag");
     const btnPrev = document.querySelector(".btn-prev");
     const btnNext = document.querySelector(".btn-next");
     const btnPage = document.querySelector(".btn-pg");
@@ -81,41 +81,44 @@
     goInit();
     renderBtnRange();
     
-    btnPages = document.querySelectorAll(".btn-range > .btn-pag");
+    // Отслеживаем клик по странице в pagination range
+    listenBtnClick();
     
-    console.log('btnPages Start: ');
-    console.log(btnPages.innerHTML);
-    console.log('-----------------');
-    // Обработчик клика по 'btnPages'?, установка активной
-// btnPages.forEach(function (btn) {
-    for (const btn of btnPages) {
-       console.log("btn in forEach: ");
-        // console.log(btn);
-        console.log("-----------------");
-        // очищаем класс "btn-pag--active" у всех элементов
-        // btnPages.forEach(function (btn) { 
-        //     btn.classList.remove("btn-pag--active");
-        // });
+    // btnPages = document.querySelectorAll(".btn-range > .btn-pag");
+    
+    // console.log('btnPages Start: ');
+    // console.log(btnPages.innerHTML);
+    // console.log('-----------------');
+    // // Обработчик клика по 'btnPages'?, установка активной
+    // // btnPages.forEach(function (btn) {
+    // for (const btn of btnPages) {
+    //    console.log("btn in forEach: ");
+    //     // console.log(btn);
+    //     console.log("-----------------");
+    //     // очищаем класс "btn-pag--active" у всех элементов
+    //     // btnPages.forEach(function (btn) { 
+    //     //     btn.classList.remove("btn-pag--active");
+    //     // });
 
-        btn.addEventListener("click", function () {
-            console.log("btnPages in forEach: ");
-            // console.log(btnPages);
-            //     console.log('-----------------');
-            //     console.log("btn: ");
-            // console.log(btn);
-            console.log(btn.textContent);
-            // Устанавливаем активный класс нажатой кнопки
-            btn.classList.add("btn-pag--active");
+    //     btn.addEventListener("click", function () {
+    //         console.log("btnPages in forEach: ");
+    //         // console.log(btnPages);
+    //         //     console.log('-----------------');
+    //         //     console.log("btn: ");
+    //         // console.log(btn);
+    //         console.log(btn.textContent);
+    //         // Устанавливаем активный класс нажатой кнопки
+    //         btn.classList.add("btn-pag--active");
 
-            // Устанавливаем активную страницу и индекс
-            currentPage = btn.innerText;
-            currentPageIndex = arrayPages.indexOf(Number(currentPage));
-            console.log("Current page: " + currentPage);
-            console.log("Current page Index: " + currentPageIndex);
+    //         // Устанавливаем активную страницу и индекс
+    //         currentPage = btn.innerText;
+    //         currentPageIndex = arrayPages.indexOf(Number(currentPage));
+    //         console.log("Current page: " + currentPage);
+    //         console.log("Current page Index: " + currentPageIndex);
 
-            goInit();
-        });
-    };
+    //         goInit();
+    //     });
+    // };
 
     // ...запуск события на элементе!
     //   let event = new Event("click", {bubbles: true}); // (2)
@@ -182,6 +185,64 @@
     });
     
               
+    // ==========   Инициализация   ===========================================================
+    function listenBtnClick() {
+        const btnPages = document.querySelectorAll(".btn-range > .btn-pag");
+        const btnRange = document.querySelectorAll(".btn-range");
+
+        btnRange.forEach(function (el) {
+            el.addEventListener('click', function (e) {
+                console.log("btnRange Start: ");
+                console.log(btnRange);
+                console.log("-----------------");
+                console.log('e');
+                console.log(e);
+                console.log('e.target');
+                console.log(e.target);
+                console.log(e.target.innerText);
+                currentPage = e.target.innerText;
+                currentPageIndex = arrayPages.indexOf(Number(currentPage));
+                console.log("Current page: " + currentPage);
+                console.log("Current page Index: " + currentPageIndex);
+                goInit();
+            });
+        });
+
+        console.log("btnPages Start: ");
+        console.log(btnPages);
+        console.log("-----------------");
+        // Обработчик клика по 'btnPages'?, установка активной
+        // btnPages.forEach(function (btn) {
+        // for (const btn of btnPages) {
+        //     console.log("btn in forEach: ");
+        //     // console.log(btn);
+        //     console.log("-----------------");
+        //     // очищаем класс "btn-pag--active" у всех элементов
+        //     // btnPages.forEach(function (btn) {
+        //     //     btn.classList.remove("btn-pag--active");
+        //     // });
+
+        //     btn.addEventListener("click", function() {
+        //         console.log("btnPages in forEach: ");
+        //         // console.log(btnPages);
+        //         //     console.log('-----------------');
+        //         //     console.log("btn: ");
+        //         // console.log(btn);
+        //         console.log(btn.textContent);
+        //         // Устанавливаем активный класс нажатой кнопки
+        //         btn.classList.add("btn-pag--active");
+
+        //         // Устанавливаем активную страницу и индекс
+        //         currentPage = btn.innerText;
+        //         currentPageIndex = arrayPages.indexOf(Number(currentPage));
+        //         console.log("Current page: " + currentPage);
+        //         console.log("Current page Index: " + currentPageIndex);
+
+        //         goInit();
+        //     });
+        // }
+        
+    };
 
     // ==========   Инициализация   ===========================================================
     function goInit() {
@@ -195,6 +256,9 @@
 
         // Обновляем данные на странице
         renderPage();
+
+        // Отслеживаем клик по странице в pagination range
+        // listenBtnClick();
     }
 
     // ==========   Установка атрибуа "disabled"   ============================================
@@ -271,8 +335,8 @@
         });
         console.log("btnRange:  ");
          console.log(btnRange.innerHTML);
-         console.log("btnPages in Render:  ");
-         console.log(btnPages.innerHTML);
+        //  console.log("btnPages in Render:  ");
+        //  console.log(btnPages.innerHTML);
          console.log("-----------------");
         // btnPages = document.querySelectorAll(".btn-range > .btn-pag");
     };
