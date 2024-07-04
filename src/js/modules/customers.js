@@ -10,28 +10,35 @@
     const numPages = Math.ceil( jsonCustomers.length / lengthPages); // Количество страниц
     let arrayPages = [];        // Массив всех страниц
     let arrayPagesToShow = [];  // Массив фрагмента (4) страниц в пагинации
+    let arrayPagesLast = []; // Массив последних (4) страниц в пагинации
+    let isLastPagesRange = false; // Последний массив страниц
 
     // Начальный и конечный индекс выборки значений
-    let startIndexOfRange ; 
+    let startIndexOfRange;
     let endIndexOfRange;
-    
-    // Начальный и конечный индекс выборки страниц
-    let startIndexOfRangePages ; 
-    let endIndexOfRangePages  ;
 
-    // console.log('numPages: ' + numPages);
+    // Начальный и конечный индекс выборки страниц
+    let startIndexOfRangePages;
+    let endIndexOfRangePages;
 
     // Массив со страницами
     for (let i = 0; i < numPages; i++) {
         arrayPages[i] = i + 1;
     }
 
+    // Последние 4 страницы
+    if (arrayPages.length > 5) {
+        arrayPagesLast = arrayPages.slice(
+            arrayPages.length - 4,
+            arrayPages.length
+        );
+    }
     
     // Инициализация текущей страницы и ее индекса
     let currentPageIndex = 0;
     let currentPage = arrayPages[currentPageIndex];
     let customersToShow;
-    
+
     // Фрагмент страниц для вывода в пагинации
     if (numPages <= 4) {
         arrayPagesToShow = arrayPages;
@@ -43,39 +50,36 @@
         }
 
         endIndexOfRangePages = arrayPagesToShow.length - 1;
-
     } else {
         if (currentPageIndex == 0) {
             startIndexOfRangePages = 0;
         }
 
-        endIndexOfRangePages = (startIndexOfRangePages + 4);
+        endIndexOfRangePages = startIndexOfRangePages + 4;
 
-        arrayPagesToShow = arrayPages.slice(startIndexOfRangePages, endIndexOfRangePages);
-
-        // console.log("startIndexOfRangePages: " + startIndexOfRangePages);
-        // console.log("endIndexOfRangePages: " + endIndexOfRangePages);
-        // console.log("arrayPagesToShow: " + arrayPagesToShow);
+        arrayPagesToShow = arrayPages.slice(
+            startIndexOfRangePages,
+            endIndexOfRangePages
+        );
     }
 
     // Элементы статистики: "показано 1 до 8 эл-тов из "
-    const startItem = document.querySelector(".start-item");    
+    const startItem = document.querySelector(".start-item");
     const endItem = document.querySelector(".end-item");
     const totalItems = document.querySelector(".total-items");
-    
+
     // Node диапазона кнопок пагинации
     const btnPrev = document.querySelector(".btn-prev");
     const btnNext = document.querySelector(".btn-next");
     const btnPage = document.querySelector(".btn-pg");
-    
-    
+
     // Начальный вывод страницы
     goInit();
     renderBtnRange();
-    
+
     // Отслеживаем клик по странице в pagination range
     listenBtnClick();
-    
+
     // ...запуск события на элементе!
     //   let event = new Event("click", {bubbles: true}); // (2)
     //   btnPages.dispatchEvent(event);
@@ -83,7 +87,6 @@
     // ==========   Обработчик нажатия кнопки  'btn-prev'  =================
     // const btnPrev = document.querySelector('.btn-prev');
     btnPrev.addEventListener("click", function() {
-
         if (currentPageIndex > 0) {
             currentPageIndex--;
             currentPage = arrayPages[currentPageIndex];
@@ -108,8 +111,7 @@
     });
 
     // ==========   Обработчик нажатия кнопки  'btn-next'  =================
-    btnNext.addEventListener("click", function () {
-        
+    btnNext.addEventListener("click", function() {
         if (currentPageIndex < arrayPages.length) {
             currentPageIndex++;
             currentPage = arrayPages[currentPageIndex];
@@ -132,62 +134,36 @@
     });
 
     // ==========   Обработчик нажатия кнопки  'btn-pg'  =================
-    btnPage.addEventListener("click", function () {
-        // console.log('btn-pg click');
-        // console.log('btn-pg: ');
-        
-        // if (currentPage < 40) {
-            console.log("currentPage before: " + currentPage);
-            if (Number(currentPage) + 40 < arrayPages.length) {
-                // Number(currentPage) += 40;
-                currentPage = Number(currentPage) + 40;
-                currentPageIndex = arrayPages.indexOf(currentPage);
+    btnPage.addEventListener("click", function() {
+        // делаем шаг на 40 страниц, если доступно
+        if (Number(currentPage) + 40 < arrayPages.length) {
+            currentPage = Number(currentPage) + 40;
+            currentPageIndex = arrayPages.indexOf(currentPage);
 
-                endIndexOfRangePages = currentPageIndex + 1;
-                startIndexOfRangePages = endIndexOfRangePages - 4;
-                // arrayPagesToShow = arrayPages.slice(
-                //     startIndexOfRangePages,
-                //     endIndexOfRangePages
-                // );
-                console.log(
-                    "currentPage after + 40 <= arrayPages.length " + currentPage);
-                    console.log("currentPageIndex: " + currentPageIndex);
-                    
-            } else {
-                currentPageIndex = arrayPages.length - 1;
-                currentPage = arrayPages[arrayPages.length - 1];
+            endIndexOfRangePages = currentPageIndex + 1;
+            startIndexOfRangePages = endIndexOfRangePages - 4;
 
-                endIndexOfRangePages = currentPageIndex + 1;
-                startIndexOfRangePages = endIndexOfRangePages - 4;
-            }
-            console.log("currentPage after: " + currentPage);
-            console.log("currentPageIndex after: " + currentPageIndex);
-            arrayPagesToShow = arrayPages.slice(
-                startIndexOfRangePages,
-                endIndexOfRangePages
-            );
+            isLastPagesRange = false;
+        } else {
+            currentPageIndex = arrayPages.length - 1;
+            currentPage = arrayPages[arrayPages.length - 1];
 
-            console.log("arrayPagesToShow: ");
-            console.log(arrayPagesToShow);
-            
-            renderBtnRange();
+            endIndexOfRangePages = currentPageIndex + 1;
+            startIndexOfRangePages = endIndexOfRangePages - 4;
 
-            // console.log("currentPage after: " + currentPage + 40);
-            
-            // currentPageIndex++;
-            // currentPage = arrayPages[currentPageIndex];
+            isLastPagesRange = true;
+        }
 
-            // Если новый счетчик больше правой границы диапазона вывода, меняем диапазон
-            // if (currentPageIndex >= endIndexOfRangePages) {
-            //     endIndexOfRangePages = currentPageIndex + 1;
-            //     startIndexOfRangePages = endIndexOfRangePages - 4;
-            //     arrayPagesToShow = arrayPages.slice(
-            //         startIndexOfRangePages,
-            //         endIndexOfRangePages
-            //     );
-            //     renderBtnRange();
-            // }
-        // }
+        arrayPagesToShow = arrayPages.slice(
+            startIndexOfRangePages,
+            endIndexOfRangePages
+        );
+
+        // console.log("arrayPagesToShow: ");
+        // console.log(arrayPagesToShow);
+
+        renderBtnRange();
+
         // Установка активной страницы в блоке 'btn-range'
         // Установка/снятие атрибуа "disabled"
         // Обновляем данные на странице
@@ -200,15 +176,13 @@
 
         btnRange.forEach(function(el) {
             el.addEventListener("click", function(e) {
-                // console.log(e.target.innerText);
-                currentPage = e.target.innerText;
+                currentPage = Number(e.target.innerText);
                 currentPageIndex = arrayPages.indexOf(Number(currentPage));
-                // console.log("Current page: " + currentPage);
-                // console.log("Current page Index: " + currentPageIndex);
+
                 goInit();
             });
         });
-    };
+    }
 
     // ==========   Инициализация   ===========================================================
     function goInit() {
@@ -224,36 +198,43 @@
 
     // ==========   Установка атрибуа "disabled"   ============================================
     function checkDisabled() {
-
         // Если достигли левой границы, делаем кнопку btnPrev - "disabled"
         if (currentPageIndex > 0) {
             btnPrev.removeAttribute("disabled");
-        } else if (currentPageIndex == 0) { btnPrev.setAttribute("disabled", ""); };
+        } else if (currentPageIndex == 0) {
+            btnPrev.setAttribute("disabled", "");
+        }
 
         // Если достигли правой границы, делаем кнопку btnNext - "disabled"
         if (currentPageIndex < arrayPages.length - 1) {
             btnNext.removeAttribute("disabled");
         } else if (currentPageIndex == arrayPages.length - 1) {
             btnNext.setAttribute("disabled", "");
-        };
+        }
 
+        checkInLastRange();
         // Если меньше 40 страниц, делаем кнопку btnPage - "disabled"
-        let maxRange = arrayPages.length < 40
-            || currentPageIndex == arrayPages.length - 1
-            || (currentPageIndex ) == arrayPages.length - 2
-            || (currentPageIndex) == arrayPages.length - 3
-            || (currentPageIndex) == arrayPages.length - 4
+        // let maxRange = arrayPages.length < 40 || isLastPagesRange;
 
-        if ( maxRange ) {
+        if (arrayPages.length < 40 || isLastPagesRange) {
             btnPage.setAttribute("disabled", "");
         } else {
             btnPage.removeAttribute("disabled");
-        };
-    };
+        }
+    }
 
     // ==========   Установка активной страницы в блоке 'btn-range'   =========================
     setActiveButtonRange(currentPage);
 
+    // ==========   Функция проверки, попадаем ли в список последних страниц   ================
+    function checkInLastRange() {
+        if (arrayPagesLast.indexOf(Number(currentPage)) != -1) {
+            isLastPagesRange = true;
+        } else {
+            isLastPagesRange = false;
+        }
+    }
+    
     // ==========   Функция установки активной страницы в блоке 'btn-range'   =================
     function setActiveButtonRange(currentPage) {
         const btnPages = document.querySelectorAll(".btn-range > .btn-pag");
