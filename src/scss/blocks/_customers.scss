@@ -39,6 +39,10 @@
     color: #16c098;
 }
 .customers__form {
+    margin-right: 26px;
+    padding-left: 8px;
+    padding-top: 4px;
+    
     display: flex;
     align-items: center;
     column-gap: 8px;
@@ -62,6 +66,13 @@
 }
 .search-input {
     width: 100%;
+
+    &::placeholder {
+        font-weight: 400;
+        font-size: 12px;
+        letter-spacing: -0.01em;
+        color: #b5b7c0;
+    }
 
     &::-webkit-search-cancel-button:hover {cursor: pointer;}
 }

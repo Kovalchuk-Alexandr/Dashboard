@@ -9,7 +9,7 @@
 .table__header {
     padding-bottom: 14px;
     display: grid;
-    grid-template-columns: 162px 120px 147px 197px 113px 114px;
+    grid-template-columns: 162px 120px 147px 197px 130px 96px;
     justify-content: space-between;
     gap: 10px;
 
@@ -21,7 +21,8 @@
     }
 
     & .status {
-        text-align: center;
+        // text-align: start;
+        padding-left: 12px;
     }
 }
 
@@ -32,7 +33,7 @@
 
 .items {
     display: grid;
-    grid-template-columns: 162px 120px 147px 197px 113px 114px;
+    grid-template-columns: 162px 120px 147px 197px 130px 96px;
     grid-template-rows: 68px;
     justify-content: space-between;
     gap: 10px;
@@ -48,7 +49,7 @@
     }
 
     & .item-status {
-        text-align: end;
+        text-align: start;
     }
 }
 

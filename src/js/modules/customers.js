@@ -5,7 +5,7 @@
 // function customers() {
     
     // Количество выводимых записей на странице
-    let lengthPages = 2;
+    let lengthPages = 8;
 
     const numPages = Math.ceil( jsonCustomers.length / lengthPages); // Количество страниц
     let arrayPages = [];        // Массив всех страниц

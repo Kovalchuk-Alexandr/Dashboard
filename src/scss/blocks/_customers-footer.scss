@@ -1,6 +1,6 @@
 .customers__footer {
     display: flex;
-    align-items: center;
+    align-items: start;
     justify-content: space-between;
 }
 
@@ -15,6 +15,11 @@
 .end-item {
 }
 .total-items {
+}
+
+.footer__pagination {
+    margin-right: 13px;
+    margin-top: 3px;
 }
 
 .footer__pagination,
@@ -32,7 +37,7 @@
     border: 1px solid #eee;
     border-radius: 4px;
     // padding: 6px 9px;
-    width: 26px;
+    width: 25px;
     height: 24px;
     background: #f5f5f5;
 
@@ -51,6 +56,7 @@
         // width: 26px;
         // height: 24px;
     }
+    & .btn-dots {width: 10px;}
     &:disabled {
         opacity: 0.3;
         cursor: default;
