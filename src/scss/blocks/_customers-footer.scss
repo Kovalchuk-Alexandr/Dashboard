@@ -18,7 +18,7 @@
 }
 
 .footer__pagination {
-    margin-right: 13px;
+    margin-right: 14px;
     margin-top: 3px;
 }
 
@@ -56,7 +56,7 @@
         // width: 26px;
         // height: 24px;
     }
-    & .btn-dots {width: 10px;}
+    &.btn-dots {width: 10px;}
     &:disabled {
         opacity: 0.3;
         cursor: default;

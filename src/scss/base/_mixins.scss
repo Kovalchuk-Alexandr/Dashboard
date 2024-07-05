@@ -11,7 +11,13 @@
 }
 
 @mixin laptop () {
-    @media (max-width: 1250px) {
+    @media (max-width: 1220px) {
+		@content;
+	}
+}
+
+@mixin laptopS () {
+    @media (max-width: 1130px) {
 		@content;
 	}
 }

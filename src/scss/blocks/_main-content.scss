@@ -3,6 +3,10 @@
     background-color: var(--second-bg);
     width: 100%;
     height: 100%;
+
+    @include laptop {
+        padding-inline: 30px;
+    }
 }
 
 .main-content__greating{

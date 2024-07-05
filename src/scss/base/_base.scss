@@ -33,9 +33,13 @@ a {
 }
 
 .wrapper {
+	position: relative;
 	display: flex;
 	height: 1198px;
+
+	@include laptop {height: 100vh;}
 }
+
 .container.time-plugin.show {
 	z-index: 99 !important;
 }
