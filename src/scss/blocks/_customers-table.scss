@@ -1,5 +1,14 @@
 .customers__table {
     margin-bottom: 27px;
+    overflow-x: auto;
+
+    @include laptopS {
+        margin-right: 14px;
+    }
+    @include mobile {
+        margin-bottom: 16px;
+    }
+    @include mobileS {margin-inline: 10px;}
 }
 
 .devider {
@@ -13,11 +22,19 @@
     justify-content: space-between;
     gap: 10px;
 
+    @include mobileM {
+        padding-bottom: 10px;
+    }
+
     & > li {
         font-weight: 500;
         font-size: 14px;
         letter-spacing: -0.01em;
         color: #b5b7c0;
+
+        @include mobileM {
+            font-size: 13px;
+        }
     }
 
     & .status {
@@ -28,7 +45,7 @@
 
 .customers__table-wrapper {
     max-height: 552px;
-    overflow-y: hidden;
+    // overflow-y: hidden;
 }
 
 .items {
@@ -46,10 +63,21 @@
         font-size: 14px;
         letter-spacing: -0.01em;
         color: #292d32;
+
+        @include mobileM {
+            font-size: 12px;
+        }
     }
 
     & .item-status {
         text-align: start;
+    }
+
+    @include laptopS {
+        grid-template-rows: 50px;
+    }
+    @include mobileM {
+        grid-template-rows: 38px;
     }
 }
 

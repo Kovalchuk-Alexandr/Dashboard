@@ -1,6 +1,10 @@
 .nav__list {
     display: grid;
     gap: 18px;
+
+	@media (max-height: 600px) {
+        gap: 12px;
+    }
 }
 
 .nav__item {
@@ -26,6 +30,11 @@
 
 	&-dashboard {
 		margin-bottom: 18px;
+
+		@media (max-height: 600px) {
+        margin-bottom: 12px;
+    }
+
 	}
 
 }

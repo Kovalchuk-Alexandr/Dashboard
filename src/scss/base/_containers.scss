@@ -6,13 +6,13 @@
 	max-width: var(--container-width);
 	width: 100%;
 
-	@include desktop {
-		padding-inline: 30px;
-	}
+	// @include desktop {
+	// 	padding-inline: 40px;
+	// }
 
-	@include tablet {
-		padding-inline: 30px;
-	}
+	// @include tablet {
+	// 	padding-inline: 30px;
+	// }
 
 	@include mobile {
 		padding: 0 15px;
@@ -21,6 +21,16 @@
 
 .container-custom {
 	padding-inline: 38px 27px;
+
+	@include tablet {
+		padding-inline: 25px 14px;
+	}
+	@include mobileM {
+		padding-inline: 20px 10px;
+	}
+	@include mobileS {
+		padding-inline: 10px ;
+	}
 }
 
 .container-full {

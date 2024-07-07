@@ -4,8 +4,20 @@
     width: 100%;
     height: 100%;
 
-    @include laptop {
-        padding-inline: 30px;
+    @include desktop {
+        padding: 30px;
+    }
+
+    @include tablet {
+        padding-block: 30px;
+    }
+
+    @include mobile {
+        padding: 20px;
+    }
+
+    @include mobileM {
+        padding: 10px;
     }
 }
 
@@ -14,4 +26,11 @@
     color: var(--text-accent);
 
     margin-bottom: 51px;
+
+    @include desktop {margin-bottom: 40px;}
+    @include tablet {margin-bottom: 20px;}
+    @include mobileM {
+        margin-bottom: 16px;
+        font-size: 19px;
+    }
 }

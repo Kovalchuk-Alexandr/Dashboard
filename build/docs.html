@@ -29,10 +29,82 @@
 			</div>
 		</header>
 		<div class="mobile-nav">
-			<ul class="mobile-nav__list">
-				<li><a href="index.html">Главная</a></li>
-				<li><a href="docs.html">Документация</a></li>
-			</ul>
+			<a href="#" class="mobile-nav__logo">
+				<img src="./img/side-menu/logo.svg" alt="Logo img" class="logo__img" />
+
+				<div class="logo__text">
+					<span class="logo__name">Dashboard</span>
+					<span class="logo__version">v.01</span>
+				</div>
+			</a>
+
+			<div class="side-menu__nav">
+				<div class="nav__item nav__item-dashboard">
+					<a href="#!" class="nav__link nav__link-dashboard">
+						<svg class="icon icon--dashboard">
+							<use href="./img/svgsprite/sprite.symbol.svg#dashboard"></use>
+						</svg>
+						<span>Dashboard</span>
+					</a>
+				</div>
+
+				<ul class="nav__list">
+					<li class="nav__item nav__item-product">
+						<a href="#!" class="nav__link">
+							<svg class="icon icon--product"><use href="./img/svgsprite/sprite.symbol.svg#product"></use></svg>
+							<span>Product</span>
+							<svg class="icon icon--arrow-right"><use href="./img/svgsprite/sprite.symbol.svg#arrow-right"></use></svg>
+						</a>
+					</li>
+
+					<li class="nav__item nav__item-customers">
+						<a href="#!" class="nav__link">
+							<svg class="icon icon--customers"><use href="./img/svgsprite/sprite.symbol.svg#customers"></use></svg>
+							<span>Customers</span>
+							<svg class="icon icon--arrow-right"><use href="./img/svgsprite/sprite.symbol.svg#arrow-right"></use></svg>
+						</a>
+					</li>
+
+					<li class="nav__item nav__item-income">
+						<a href="#!" class="nav__link">
+							<svg class="icon icon--income"><use href="./img/svgsprite/sprite.symbol.svg#income"></use></svg>
+							<span>Income</span>
+							<svg class="icon icon--arrow-right"><use href="./img/svgsprite/sprite.symbol.svg#arrow-right"></use></svg>
+						</a>
+					</li>
+
+					<li class="nav__item nav__item-promote">
+						<a href="#!" class="nav__link">
+							<svg class="icon icon--promote"><use href="./img/svgsprite/sprite.symbol.svg#promote"></use></svg>
+							<span>Promote</span>
+							<svg class="icon icon--arrow-right"><use href="./img/svgsprite/sprite.symbol.svg#arrow-right"></use></svg>
+						</a>
+					</li>
+
+					<li class="nav__item nav__item-help">
+						<a href="#!" class="nav__link">
+							<svg class="icon icon--help"><use href="./img/svgsprite/sprite.symbol.svg#help"></use></svg>
+							<span>Help</span>
+							<svg class="icon icon--arrow-right"><use href="./img/svgsprite/sprite.symbol.svg#arrow-right"></use></svg>
+						</a>
+					</li>
+				</ul>
+			</div>
+
+			<div class="mobile-nav__user">
+				<div class="user__avatar">
+					<picture>
+						<source srcset="./img/side-menu/user.webp 1x, ./img/side-menu/user@2x.webp 2x" type="image/webp" />
+						<source srcset="./img/side-menu/user.jpg 1x, ./img/side-menu/user@2x.jpg 2x" type="image/jpeg" />
+						<img src="./img/side-menu/user.jpg" alt="User" class="user__img" />
+					</picture>
+				</div>
+
+				<div class="user__content">
+					<div class="user__name">Evano</div>
+					<div class="job-title">Project Manager</div>
+				</div>
+			</div>
 		</div>
 
 		<main class="docs">

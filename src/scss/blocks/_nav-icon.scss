@@ -2,14 +2,14 @@
 .mobile-nav-btn {
 	--time: 0.1s;
 
-	--width: 40px;
-	--height: 30px;
+	--width: 20px;
+	--height: 12px;
 
-	--line-height: 4px;
-	--spacing: 6px;
+	--line-height: 2px;
+	--spacing: 4.76px;
 
-	--color: #000;
-	--radius: 4px;
+	--color: var(--text-accent);
+	--radius: 2px;
 
 	/* Fixed height and width */
 	/* height: var(--height); */
@@ -22,6 +22,10 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
+
+	position: absolute;
+	top: 20px;
+	right: 20px;
 }
 
 .nav-icon {
@@ -82,11 +86,11 @@
 
 .mobile-nav-btn {
 	z-index: 999;
-	// display: none;
+	display: none;
 }
 
-// @media (max-width: 1000px) {
-// 	.mobile-nav-btn {
-// 		display: block;
-// 	}
-// }
+@media (max-width: 1350px) {
+	.mobile-nav-btn {
+		display: block;
+	}
+}
