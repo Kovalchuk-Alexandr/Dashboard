@@ -284,6 +284,11 @@
     // ==========   Вывод продуктов в цикле из каталога   =============================
      function showItems() {
         const product = document.querySelector(".customers__table-wrapper");
+        if (product.classList.contains("animate-out")) {
+            product.classList.remove("animate-out");
+        }
+        product.classList.add('animate-in');
+        animateOut();
         product.innerHTML = '';
   
         customersToShow.forEach(function (item) {
@@ -301,6 +306,10 @@
             `;
             product.innerHTML += text;
         });
+        if (product.classList.contains("animate-in")) {
+            product.classList.remove("animate-in");
+        }
+        product.classList.add("animate-out");
     };
 
      // Функция рендеринга/инициализации страницы

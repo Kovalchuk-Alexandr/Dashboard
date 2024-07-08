@@ -17,28 +17,15 @@
     letter-spacing: -0.01em;
     color: #b5b7c0;
 
-    @include mobileS {
-        font-size: 12px;
-    }
-}
-
-.start-item {
-}
-.end-item {
-}
-.total-items {
+    @include mobileS {font-size: 12px;}
 }
 
 .footer__pagination {
     margin-right: 14px;
     margin-top: 3px;
 
-    @include mobile {
-        margin-left: auto;
-    }
-    @include mobileS {
-        margin: unset;
-    }
+    @include mobile {margin-left: auto;}
+    @include mobileS {margin: unset;}
 }
 
 .footer__pagination,
@@ -81,17 +68,4 @@
         opacity: 0.3;
         cursor: default;
     }
-}
-
-.btn-prev {
-
-    // &:disabled {opacity: 0.6;}
-}
-.btn-dots {
-}
-.btn-pg {
-    // &:disabled {opacity: 0.6;}
-}
-.btn-next {
-    // &:disabled {opacity: 0.6;}
 }

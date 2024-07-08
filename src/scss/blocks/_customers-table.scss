@@ -47,6 +47,12 @@
     max-height: 552px;
     // overflow-y: hidden;
 }
+.animate-in:nth-child(odd) {
+    background-color: #df0404;
+}
+.animate-out:nth-child(even) {
+    background-color: lightcoral;
+}
 
 .items {
     display: grid;
@@ -100,12 +106,7 @@
         background: rgba(22, 192, 152, 0.38);
     }
 
-    &:hover{
-        opacity: 0.85;
-    }
+    &:hover{opacity: 0.85;}
 
-    &:active {
-        outline: 1px solid gray;
-    }
-
+    &:active {outline: 1px solid gray;}
 }
