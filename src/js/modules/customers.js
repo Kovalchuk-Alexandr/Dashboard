@@ -180,8 +180,6 @@
                 currentPage = Number(e.target.innerText);
                 currentPageIndex = arrayPages.indexOf(Number(currentPage));
 
-                // animateOut();
-                // setTimeout(() => {goInit();},); 
                 goInit();
             });
         });
@@ -237,12 +235,12 @@
             isLastPagesRange = false;
         }
     }
-    
+
     // ==========   Функция установки активной страницы в блоке 'btn-range'   =================
     function setActiveButtonRange(currentPage) {
         const btnPages = document.querySelectorAll(".btn-range > .btn-pag");
 
-        btnPages.forEach(function (btn) {
+        btnPages.forEach(function(btn) {
             // В зависимости от статуса устанавливаем класс 'active'
             if (btn.innerText == currentPage) {
                 btn.classList.add("btn-pag--active");
@@ -250,61 +248,59 @@
                 btn.classList.remove("btn-pag--active");
             }
         });
-    };
-    
+    }
+
     // == Функция усановки начального и конечного индекса выводимых элементов данной страницы ==
     function getIndexRange(currentPage) {
         if (currentPage == 1) {
-            startIndexOfRange = 0; 
-            endIndexOfRange = (lengthPages - 1) ;
+            startIndexOfRange = 0;
+            endIndexOfRange = lengthPages - 1;
         } else {
-            startIndexOfRange = (currentPage - 1) * lengthPages ;
-            endIndexOfRange = startIndexOfRange + lengthPages-1;
+            startIndexOfRange = (currentPage - 1) * lengthPages;
+            endIndexOfRange = startIndexOfRange + lengthPages - 1;
 
-            if (endIndexOfRange > (jsonCustomers.length - 1)) {
+            if (endIndexOfRange > jsonCustomers.length - 1) {
                 endIndexOfRange = jsonCustomers.length - 1;
             }
         }
     }
 
     // ==========   Вывод диапазона страниц   =============================
-     function renderBtnRange() {
+    function renderBtnRange() {
         const btnRange = document.querySelector(".btn-range");
         btnRange.innerHTML = "";
-  
-        const maxPages = (arrayPagesToShow.length < 4) ? arrayPages.length : 4;
-        // console.log("max pages: " + maxPages);
-        let text = '';
 
-        arrayPagesToShow.forEach((page, i, ) => {
-                  
-            text = `<button class="btn-pag">${page}</button>`
-                
+        const maxPages = arrayPagesToShow.length < 4 ? arrayPages.length : 4;
+        // console.log("max pages: " + maxPages);
+        let text = "";
+
+        arrayPagesToShow.forEach((page, i) => {
+            text = `<button class="btn-pag">${page}</button>`;
+
             btnRange.innerHTML += text;
         });
-    };
+    }
 
     // ==========   Вывод продуктов в цикле из каталога   =============================
     // const product = document.querySelector(".customers__table-wrapper");
-     function showItems() {
+    function showItems() {
         return new Promise((resolve) => {
-        // Временно скраваем блок, для анимации появления
-        // product.classList.add('none');
-         
-        // animateOut();
-         product.innerHTML = '';
-        let text = '';
-        let textToShow = "";
-        let classHide = '';    
-  
-        customersToShow.forEach(function (item, index) {
-            if (index % 2 == 0) {
-                classHide = "hide-to-right";
-            } else {
-                classHide = "hide-to-left";
-            }    
+            // Временно скраваем блок, для анимации появления
+            // product.classList.add('none');
 
-             text = `
+            product.innerHTML = "";
+            let text = "";
+            let textToShow = "";
+            let classHide = "";
+
+            customersToShow.forEach(function(item, index) {
+                if (index % 2 == 0) {
+                    classHide = "hide-to-right";
+                } else {
+                    classHide = "hide-to-left";
+                }
+
+                text = `
                 <ul class="items ${classHide}">
                     <li class="item-name">${item.name}</li>
                     <li class="item-company">${item.company}</li>    
@@ -316,68 +312,56 @@
                     </li>
                 </ul>
             `;
-            textToShow += text;
-         });
-        // console.log('product: ');
-        // console.log(product);
-        // console.log("textToShow: ");
-        // console.log(textToShow);
+                textToShow += text;
+            });
 
-         if (firstRun) {
-             product.style.opacity = 1;
-             product.innerHTML = textToShow;
-         }
-         else {
-            //  product.style.opacity = 0;
-             product.innerHTML = textToShow;
-             // Устанавливаем начальные значения за пределами таблицы и opacity: 0
-            //  setOutOfRange(); 
-            //  product.style.opacity = 1;
-            //  pause();
-             console.log("in show Items");
-            //  setTimeout(() => {
-            //     console.log('Pause 2 sec....');
-                
-            //  }, 2000);
-            //  animateIn();
-        }
-        resolve();
-        
+            if (firstRun) {
+                product.style.opacity = 1;
+                product.innerHTML = textToShow;
+            } else {
+                product.innerHTML = textToShow;
+                // Устанавливаем начальные значения за пределами таблицы и opacity: 0
+                //  setOutOfRange();
+            }
+            resolve();
         });
-    };
-    
+    }
+
     // ==============  Асинхронная функция паузы  =============================================
     function sleep(ms) {
-        return new Promise(resolve => setTimeout(resolve, ms));
+        return new Promise((resolve) => setTimeout(resolve, ms));
     }
 
-async function pause() {
+    async function pause() {
         // Анимация исчезания строк
         await animateOut();
-        console.log('after Animate Out');
-        console.log('Taking a break...');
-        await sleep(2000);
-        console.log('Two second later');
+        //  console.log("after Animate Out");
+        //  console.log("Taking a break...");
+        await sleep(1000);
+        //  console.log("One second later");
         await showItems();
-        console.log("after Show Items");
-        console.log("Taking a break 3...");
-        await sleep(3000);
-        console.log("Two second later 2");
+        //  console.log("after Show Items");
+        //  console.log("Taking a break 0.3...");
+        await sleep(300);
+        //  console.log("later 2");
         await animateIn();
-        console.log("after Animate In");
+        //  console.log("after Animate In");
+        await btnStatus();
+        //  console.log("after btnStatus");
+        await sleep(2000);
+        await setScrollAuto();
     }
 
-
-     // Функция рендеринга/инициализации страницы
+    // Функция рендеринга/инициализации страницы
     function renderPage() {
         // Определяем начальный и конечный индекс элементов данной страницы
         getIndexRange(currentPage);
 
         // Выборка элементов текущей страницы для рендеринга
-        customersToShow = jsonCustomers.slice(startIndexOfRange, endIndexOfRange + 1);
-
-        // console.log("customersToShow: ");
-        // console.log(customersToShow);
+        customersToShow = jsonCustomers.slice(
+            startIndexOfRange,
+            endIndexOfRange + 1
+        );
 
         // Элементы статистики: "показано 1 до 8 эл-тов из "
         startItem.textContent = startIndexOfRange + 1;
@@ -391,23 +375,23 @@ async function pause() {
 
             firstRun = false;
         } else {
-            // Анимация исчезания строк
-            // animateOut();
+            //  Убираем скролл на время анимации
+            const custTable = document.querySelector(".customers__table");
+            custTable.style.overflow = "hidden";
+            // Анимация исчезания/появления строк
             pause();
-            console.log('after pause in render Page');
-            
-            // showItems();
-            // btnStatus();
-                // .then(() => showItems())
-                // .then(() => {
-                //     return new Promise(function (resolve) {
-                //         showItems()
-                //         resolve();
-                //     });
-                // })
-                // .then(() => btnStatus());
         }
-    };
+    }
+
+    // Восстанавливаем скролл в конце анимации
+    function setScrollAuto() {
+        return new Promise((resolve, reject) => {
+            const custTable = document.querySelector(".customers__table");
+            custTable.style.overflow = "auto";
+            resolve();
+        });
+    }
+    
 // }
 
 // export default customers;
