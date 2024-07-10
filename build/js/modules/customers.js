@@ -342,13 +342,13 @@
         await showItems();
         //  console.log("after Show Items");
         //  console.log("Taking a break 0.3...");
-        await sleep(300);
+        await sleep(100);
         //  console.log("later 2");
         await animateIn();
         //  console.log("after Animate In");
         await btnStatus();
         //  console.log("after btnStatus");
-        await sleep(2000);
+        await sleep(2500);
         await setScrollAuto();
     }
 
