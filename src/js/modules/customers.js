@@ -6,6 +6,8 @@
     
     // Количество выводимых записей на странице
     let lengthPages = 8;
+    // Первая загрузка страницы
+    let firstRun = true;
 
     const numPages = Math.ceil( jsonCustomers.length / lengthPages); // Количество страниц
     let arrayPages = [];        // Массив всех страниц
@@ -72,6 +74,8 @@
     const btnPrev = document.querySelector(".btn-prev");
     const btnNext = document.querySelector(".btn-next");
     const btnPage = document.querySelector(".btn-pg");
+    
+    const product = document.querySelector(".customers__table-wrapper");
 
     // Начальный вывод страницы
     goInit();
@@ -159,9 +163,6 @@
             endIndexOfRangePages
         );
 
-        // console.log("arrayPagesToShow: ");
-        // console.log(arrayPagesToShow);
-
         renderBtnRange();
 
         // Установка активной страницы в блоке 'btn-range'
@@ -179,6 +180,8 @@
                 currentPage = Number(e.target.innerText);
                 currentPageIndex = arrayPages.indexOf(Number(currentPage));
 
+                // animateOut();
+                // setTimeout(() => {goInit();},); 
                 goInit();
             });
         });
@@ -249,7 +252,7 @@
         });
     };
     
-    // Функция усановки начального и конечного индекса выводимых элементов данной страницы
+    // == Функция усановки начального и конечного индекса выводимых элементов данной страницы ==
     function getIndexRange(currentPage) {
         if (currentPage == 1) {
             startIndexOfRange = 0; 
@@ -282,18 +285,27 @@
     };
 
     // ==========   Вывод продуктов в цикле из каталога   =============================
+    // const product = document.querySelector(".customers__table-wrapper");
      function showItems() {
-        const product = document.querySelector(".customers__table-wrapper");
-        if (product.classList.contains("animate-out")) {
-            product.classList.remove("animate-out");
-        }
-        product.classList.add('animate-in');
-        animateOut();
-        product.innerHTML = '';
+        return new Promise((resolve) => {
+        // Временно скраваем блок, для анимации появления
+        // product.classList.add('none');
+         
+        // animateOut();
+         product.innerHTML = '';
+        let text = '';
+        let textToShow = "";
+        let classHide = '';    
   
-        customersToShow.forEach(function (item) {
-             let text = `
-                <ul class="items">
+        customersToShow.forEach(function (item, index) {
+            if (index % 2 == 0) {
+                classHide = "hide-to-right";
+            } else {
+                classHide = "hide-to-left";
+            }    
+
+             text = `
+                <ul class="items ${classHide}">
                     <li class="item-name">${item.name}</li>
                     <li class="item-company">${item.company}</li>    
                     <li class="item-phone">${item.phone}</li>
@@ -304,13 +316,57 @@
                     </li>
                 </ul>
             `;
-            product.innerHTML += text;
-        });
-        if (product.classList.contains("animate-in")) {
-            product.classList.remove("animate-in");
+            textToShow += text;
+         });
+        // console.log('product: ');
+        // console.log(product);
+        // console.log("textToShow: ");
+        // console.log(textToShow);
+
+         if (firstRun) {
+             product.style.opacity = 1;
+             product.innerHTML = textToShow;
+         }
+         else {
+            //  product.style.opacity = 0;
+             product.innerHTML = textToShow;
+             // Устанавливаем начальные значения за пределами таблицы и opacity: 0
+            //  setOutOfRange(); 
+            //  product.style.opacity = 1;
+            //  pause();
+             console.log("in show Items");
+            //  setTimeout(() => {
+            //     console.log('Pause 2 sec....');
+                
+            //  }, 2000);
+            //  animateIn();
         }
-        product.classList.add("animate-out");
+        resolve();
+        
+        });
     };
+    
+    // ==============  Асинхронная функция паузы  =============================================
+    function sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+async function pause() {
+        // Анимация исчезания строк
+        await animateOut();
+        console.log('after Animate Out');
+        console.log('Taking a break...');
+        await sleep(2000);
+        console.log('Two second later');
+        await showItems();
+        console.log("after Show Items");
+        console.log("Taking a break 3...");
+        await sleep(3000);
+        console.log("Two second later 2");
+        await animateIn();
+        console.log("after Animate In");
+    }
+
 
      // Функция рендеринга/инициализации страницы
     function renderPage() {
@@ -327,11 +383,30 @@
         startItem.textContent = startIndexOfRange + 1;
         endItem.textContent = endIndexOfRange + 1;
         totalItems.textContent = jsonCustomers.length;
-        
-        // Выводим данные
-        showItems();
-        
-        btnStatus();
+
+        if (firstRun) {
+            // Выводим данные
+            showItems();
+            btnStatus();
+
+            firstRun = false;
+        } else {
+            // Анимация исчезания строк
+            // animateOut();
+            pause();
+            console.log('after pause in render Page');
+            
+            // showItems();
+            // btnStatus();
+                // .then(() => showItems())
+                // .then(() => {
+                //     return new Promise(function (resolve) {
+                //         showItems()
+                //         resolve();
+                //     });
+                // })
+                // .then(() => btnStatus());
+        }
     };
 // }
 
