@@ -38,9 +38,6 @@ a {
 	height: 1198px;
 
 	@media (max-height: 1189px) or (max-width: 1399px) {height: 100vh;}
-	
-
-	// @include laptop {height: 100vh;}
 }
 
 .container.time-plugin.show {
