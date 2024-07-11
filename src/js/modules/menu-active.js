@@ -1,4 +1,4 @@
-// function menuActive() {
+function menuActive() {
     const items = document.querySelectorAll(".nav__item");
     const customers = document.querySelector(".customers");
 
@@ -23,6 +23,6 @@
             }
         });
     });
-// }
+}
 
-// export default menuActive;
+export default menuActive;

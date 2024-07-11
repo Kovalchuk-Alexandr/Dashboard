@@ -1,8 +1,8 @@
-// import jsonCustomers from './../../html/data/customers.json'
-// import jsonCustomers from './../../data/customers.js';
-// import btnStatus from "./btn-status.js";
+import jsonCustomers from './../../data/customers.json';
+import btnStatus from "./btn-status.js";
+import { animateOut, animateIn } from "./animate-in-out.js";
 
-// function customers() {
+function customers() {
     
     // Количество выводимых записей на странице
     let lengthPages = 8;
@@ -392,6 +392,6 @@
         });
     }
     
-// }
+}
 
-// export default customers;
+export default customers;

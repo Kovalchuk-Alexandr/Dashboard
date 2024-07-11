@@ -1,3 +1,5 @@
+import anime from "./../lib/anime.es.js";
+
 // =============  Функция скрытия записей  ===========================================================
 const product = document.querySelector(".customers__table-wrapper");
 function animateOut() {
@@ -46,38 +48,6 @@ function animateOut() {
 
         resolve();
     });
-
-    // animate({
-    //     duration: 3000,
-    //     // timing: bounceEaseInOut,
-    //     timing: circEaseInOut,
-    //     draw: function (progress) {
-    //         // const items = document.querySelectorAll(".items");
-    //         console.log("items");
-    //         console.log(items);
-    //         console.log("-------------");
-
-    //         items.forEach((item, index) => {
-    //             // console.log("Index: " + index);
-    //             // console.log("Item: ");
-    //             // console.log(item);
-    //             console.log("progress in animateOut: " + progress);
-
-    //             if (index % 2 == 0) {
-    //                 console.log("index%2 == 0");
-    //                 item.style.left = progress * 100 + "%";
-    //                 item.style.opacity = progress;
-    //             } else {
-    //                 console.log("index%2 != 0");
-    //                 item.style.left = -(progress * 100) + "%";
-    //                 item.style.opacity = progress;
-    //             }
-    //         });
-    //         // brick.style.left = progress * 500 + "px";
-    //         // elem.style.width = progress * 100 + "%";
-    //     }
-    //     // draw: draw
-    // });
 }
 // =============  Функция появления записей  ===========================================================
 function animateIn() {
@@ -109,7 +79,7 @@ function animateIn() {
     });
 }
 
-// ==========================================================================
+// ====================  Тестовый вариант  ======================================
 function animateOutPromice() {
     return new Promise((resolve, reject) => {
         const items = document.querySelectorAll(".items");
@@ -169,10 +139,7 @@ function animateOutPromice() {
                         console.log("left: " + item.style.left);
                         console.log("opacity: " + item.style.opacity);
                     });
-                    // brick.style.left = progress * 500 + "px";
-                    // elem.style.width = progress * 100 + "%";
                 },
-                // draw: draw
             });
         }
 
@@ -196,7 +163,7 @@ function setOutOfRange() {
     });
 }
 
-// ====================  Тестовый вариант  ======================================
+// ==========================================================================
 function makeEaseInOut(timing) {
     return function(timeFraction) {
         if (timeFraction < 0.5) return timing(2 * timeFraction) / 2;
@@ -257,4 +224,5 @@ let circEaseInOut = makeEaseInOut(circ);
 //         });
 //         resolve();
 //     });
-// }
+
+export { animateOut, animateIn };

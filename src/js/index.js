@@ -1,17 +1,8 @@
-// Галерея и лайтбоксы от Fancybox
-// import { Fancybox } from '@fancyapps/ui';
-// import '@fancyapps/ui/dist/fancybox/fancybox.css';
+import menuActive from "./modules/menu-active.js";
+menuActive();
 
-// Fancybox.bind('[data-fancybox]', {
-// 	// Your custom options
-// });
-
-
-// import menuActive from "./modules/menu-active.js";
-// menuActive();
-
-// import customers from "./modules/customers.js";
-// customers();
+import customers from "./modules/customers.js";
+customers();
 
 
 // Мобильная навигация
@@ -31,9 +22,6 @@ function toggleMobile() {
     fade.classList.toggle("mobile-nav-fade--open");
 }
 
-
-// import btnStatus from "./modules/btn-status.js";
-// btnStatus();
 // Мобильная навигация
 // import mobileNav from './modules/mobile-nav.js';
 // mobileNav();

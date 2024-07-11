@@ -24,4 +24,4 @@ function btnStatus() {
     });
 }
 
-// export default btnStatus;
+export default btnStatus;
